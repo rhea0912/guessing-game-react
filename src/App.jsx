@@ -3,6 +3,7 @@ import Button from "./Button";
 import "./App.css";
 
 function App() {
+  const range = 8;
   const [hiddenNumber, setHiddenNumber] = useState(
     Math.floor(Math.random() * 100)
   );
@@ -39,12 +40,19 @@ function App() {
       setHistoryResult("Win");
       setBtnValue({bg:"green", label: "Play Again"})
     }
-    else if (hiddenNumber > guessNumber) {
-      message = "To low!";
+    else if (guessNumber > hiddenNumber) {
+      message = "To High!";
+      if(guessNumber <= hiddenNumber + range)
+      {
+        message = "Make it lower";
+      }
       _lives -= 1;
     } 
-    else if (hiddenNumber < guessNumber) {
-      message = "To High!";
+    else if (guessNumber < hiddenNumber) {
+      message = "To Low!";
+      if(guessNumber >= hiddenNumber - range){
+        message = "Make it higher";
+      }
       _lives -= 1;
     }
 
